@@ -1,0 +1,22 @@
+name: Shell commands
+
+on: [push]
+
+jobs:
+  run-shell-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo a string
+        run: echo "hello world"
+      - name: multiple script
+        run: |
+          node -v
+          npm -v
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simple JS action 
+        uses: action/hello-world-javascrupt-action@v3
+        with:
+          who-to-greet: John
+          
