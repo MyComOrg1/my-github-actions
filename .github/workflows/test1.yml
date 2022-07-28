@@ -1,0 +1,8 @@
+name: test 1
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-maven-build:
+    uses: myComOrg1/standard-workflows/.github/workflows/maven-buildls.yml@main
