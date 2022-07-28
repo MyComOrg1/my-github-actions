@@ -6,3 +6,5 @@ on:
 jobs:
   test-maven-build:
     uses: MyComOrg1/standard-workflows/.github/workflows/maven-build.yml@main
+    with:
+      jdkVersion: "8"
