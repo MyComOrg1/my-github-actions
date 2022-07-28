@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Simple JS action 
-        uses: action/hello-world-javascrupt-action@v3
+        uses: action/hello-world-javascript-action@v3
         with:
           who-to-greet: John
           
