@@ -1,0 +1,13 @@
+name: "maven build + eks deploy"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-maven-build:
+    uses: MyComOrg1/standard-workflows/.github/workflows/maven-build.yml@main
+    with:
+      jdkVersion: "8"
+  deploy:
+    uses: MyComOrg1/standard-workflows/.github/workflows/eks-deploy.yml@main
+    
