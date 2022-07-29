@@ -12,6 +12,7 @@ jobs:
     uses: MyComOrg1/standard-workflows/.github/workflows/eks-deploy.yml@main
     with:
       namespace: "namespace-1"
-    secrets:
-      token: ${{ secrets.token }}
+    secrets: inherit
+    #secrets:
+    #  token: ${{ secrets.token }}
     
