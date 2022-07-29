@@ -10,4 +10,6 @@ jobs:
       jdkVersion: "8"
   deploy:
     uses: MyComOrg1/standard-workflows/.github/workflows/eks-deploy.yml@main
+    with:
+      namespace: "namespace-1"
     
