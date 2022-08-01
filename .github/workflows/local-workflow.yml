@@ -1,0 +1,25 @@
+name: "local workflow" # note: the reusable workflow name is not shown in caller
+                        #       it is overwritten by caller worflow job name
+
+on:
+  workflow_call: # this is the only one needed to enabled 'callable'
+    inputs:
+      majorVersion:
+        type: string
+        required: true
+        default: "11"
+      optionalMinorVersion:
+        type: string
+        required: false
+        default: "11"
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Local workflow print major version 
+        run: echo "major ${{ inputs.majorVersion }}"
+
+      - name: Local workflow print minor version
+        run: echo "[Optional] minor version - ${{ inputs.optionalMinorVersion }}"
