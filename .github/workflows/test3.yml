@@ -5,6 +5,6 @@ on:
 
 jobs:
   test-maven-build:
-    uses: MyComOrg1/standard-workflows/.github/workflows/sample-workflow-1-.yml@main
+    uses: MyComOrg1/standard-workflows/.github/workflows/sample-workflow-1.yml@main
     with:
       majorVersion: "8"
