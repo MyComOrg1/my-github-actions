@@ -9,6 +9,7 @@ jobs:
     with:
       majorVersion: "8"
   call-local-workflow:
+    needs: call-sample-workflow-1
     uses: ./.github/workflows/local-workflow.yml
     with:
       majorVersion: "11"
