@@ -9,7 +9,7 @@ jobs:
     with:
       majorVersion: "8"
   call-local-workflow:
-    uses: ../.github/workflows/local-workflow.yml@main
+    uses: ./local-workflow.yml@main
     with:
       majorVersion: "11"
       optionalMinorVersion: "0"
