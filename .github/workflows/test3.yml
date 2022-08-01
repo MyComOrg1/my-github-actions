@@ -1,4 +1,4 @@
-name: "Invalid workflow reuse"
+name: "Sample workflow reuse"
 
 on:
   push:
