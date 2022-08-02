@@ -14,7 +14,4 @@ jobs:
           echo "value of env.WHOAMI: ${{ env.WHOAMI }}"
           echo "value of WHOAMI: $WHOAMI"
   call-printenv-workflow:
-    uses: ./.github/workflows/local-workflow.yml
-    with:
-      majorVersion: "11"
-      optionalMinorVersion: "0"
+    uses: ./.github/workflows/print-env.yml
