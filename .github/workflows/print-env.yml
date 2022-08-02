@@ -1,0 +1,15 @@
+name: "print env worklow" # note: the reusable workflow name is not shown in caller
+                        #       it is overwritten by caller worflow job name
+
+on:
+  workflow_call:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print env (inner)
+        run: |
+          echo "value of env.WHOAMI: ${{ env.WHOAMI }}"
+          echo "value of WHOAMI: $WHOAMI"

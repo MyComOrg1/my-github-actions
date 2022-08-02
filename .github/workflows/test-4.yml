@@ -1,0 +1,20 @@
+name: "test env not propagated to called workflow"
+
+on:
+  push:
+env:
+  WHOAMI: caller
+
+jobs:
+  print-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print env 
+        run: |
+          echo "value of env.WHOAMI: ${{ env.WHOAMI }}"
+          echo "value of WHOAMI: $WHOAMI"
+  call-printenv-workflow:
+    uses: ./.github/workflows/local-workflow.yml
+    with:
+      majorVersion: "11"
+      optionalMinorVersion: "0"
