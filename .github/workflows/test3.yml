@@ -2,6 +2,7 @@ name: "Sample workflow reuse"
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   call-sample-workflow-1:
