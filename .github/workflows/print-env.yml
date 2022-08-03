@@ -13,3 +13,5 @@ jobs:
         run: |
           echo "value of env.WHOAMI: ${{ env.WHOAMI }}"
           echo "value of WHOAMI: $WHOAMI"
+          echo "value of GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "value of HOME: ${HOME}"
