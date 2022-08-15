@@ -13,4 +13,4 @@ jobs:
       - name: step1
         run: |
           echo "hello from ping.yaml"
-          echo "ref = ${{ github.event.client_payload }}"
+          echo "ref = ${{ github.event.client_payload.integration }}"
