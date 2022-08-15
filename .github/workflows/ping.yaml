@@ -1,0 +1,12 @@
+name: Ping
+env:
+  owner: mero
+  repo: example-event-dispatcher-workflow
+on:
+  repository_dispatch:
+    types: [run-ping]
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      run: echo "hello from ping.yaml"
