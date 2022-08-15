@@ -4,7 +4,8 @@ env:
   repo: example-event-dispatcher-workflow
 on:
   repository_dispatch:
-    types: [run-ping]
+    types: [run-ping, webhook]
+
 jobs:
   ping:
     runs-on: ubuntu-latest
