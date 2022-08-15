@@ -9,4 +9,5 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      run: echo "hello from ping.yaml"
+      - name: step1
+        run: echo "hello from ping.yaml"
