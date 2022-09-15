@@ -1,4 +1,4 @@
-resource_group_name  = "rg-infra-pae01-eastus01"
-storage_account_name = "sapaetoolchaineus01"
+resource_group_name  = "billingautomation2"
+storage_account_name = "billingautomation2"
 container_name       = "tfstate"
 key                  = "MAX-PAE-ToolchainAPI/pae_app_registration.terraform.tfstate"
