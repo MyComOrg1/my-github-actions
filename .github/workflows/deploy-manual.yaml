@@ -1,0 +1,88 @@
+name: 'PAE Toolchain Infra Workflow manual'
+
+on:
+  workflow_call: # this is the only one needed to enabled 'callable'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    name: 'Toolchain-Infra-Build'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      ARM_USE_OIDC: true
+    runs-on: ubuntu-latest
+    environment: PAE-Dev
+    defaults:
+      run:
+        working-directory: infra
+
+    steps:
+    - name: Setup TFLint
+      uses: terraform-linters/setup-tflint@v1
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Terraform version  
+      run: terraform --version
+
+    - name: Terraform fmt  
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: false 
+
+    - name: Log in to Azure using OIDC
+      uses: azure/login@v1
+      with:
+        creds: '{"clientId":"${{ secrets.AZURE_AD_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_AD_TENANT_ID }}"}'
+      
+    - name: Terraform Init
+      id: init
+      run: terraform init -upgrade=true -reconfigure -backend-config="backend/pae.tfbackend" 
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+    - name: Terraform providers 
+      run: terraform providers
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      id: plan
+      run: 'terraform plan -var-file="environments/pae.tfvars" --out=out.tfplan'
+      #run: 'terraform plan -var-file="environments/pae.tfvars" -refresh-only'
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+    - name: Terraform apply
+    #   if: github.ref == 'refs/heads/master' //todo: apply only for master branch
+      id: tfapply
+      run: |
+        terraform apply "out.tfplan"
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        TF_LOG: DEBUG
+
+    - name: Logout from Azure
+      if: ${{ always() }}
+      run: |
+        az logout
