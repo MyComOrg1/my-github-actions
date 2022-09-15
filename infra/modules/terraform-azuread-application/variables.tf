@@ -18,3 +18,22 @@ variable "sign_in_audience" {
     error_message = "Must be one of AzureADMyOrg, AzureADMultipleOrgs, AzureADandPersonalMicrosoftAccount or PersonalMicrosoftAccount. Defaults to AzureADMyOrg."
   }
 }
+
+variable "app_roles" {
+  type = list(object({
+    allowed_member_types    = list // options: User, Application
+    description             = string
+    display_name            = bool
+    enabled                 = bool
+    value                   = string
+  }))
+
+  // todo: default to empty?
+  default = [{
+    allowed_member_types    = ["Application"] // options: User, Application
+    description             = ""
+    display_name            = ""
+    enabled                 = true
+    value                   = ""
+  }]
+}

@@ -1,6 +1,23 @@
 resource "azuread_application" "ad-app" {
   display_name     = var.ad_app_name
   sign_in_audience = var.sign_in_audience
+
+
+  # dynamic app_role {
+  #   for_each  = var.app_roles
+  #   iterator  = role
+  #   content {
+  #     allowed_member_types = role.value.allowed_member_types
+  #     description          = role.value.description
+  #     display_name         = role.value.display_name
+  #     enabled              = role.value.enabled
+  #     id                   = random_uuid.uuid.result
+  #     value                = role.value.value
+  #   }
+  # }
+
+
+
   //optional parameters
   /*identifier_uris  = ["api://example-app"]
   logo_image       = filebase64("/path/to/logo.png")
@@ -35,16 +52,6 @@ resource "azuread_application" "ad-app" {
       value                      = "administer"
     }
   }
-
-  app_role {
-    allowed_member_types = ["User", "Application"]
-    description          = "Admins can manage roles and perform all task actions"
-    display_name         = "Admin"
-    enabled              = true
-    id                   = "1b19509b-32b1-4e9f-b71d-4992aa991967"
-    value                = "admin"
-  }
-
   app_role {
     allowed_member_types = ["User"]
     description          = "ReadOnly roles have limited query access"
@@ -113,4 +120,7 @@ resource "azuread_application" "ad-app" {
       id_token_issuance_enabled     = true
     }
   }*/
+}
+
+resource "random_uuid" "uuid" {
 }

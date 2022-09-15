@@ -63,6 +63,7 @@ module "app-registration-github" {
   source           = "./modules/terraform-azuread-application"
   ad_app_name      = "GitHub-test"
   sign_in_audience = "AzureADMyOrg"
+  app_roles        = []
 }
 
 # module "sample-func-app-1-diagnostic-setting" {
