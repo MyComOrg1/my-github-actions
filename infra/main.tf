@@ -114,3 +114,14 @@ module "app-registration-github" {
 # output "function_connection_string" {
 #   value = module.sample-func-app-1.connection_string
 # }
+
+// output app registration
+output "application_id" {
+  value = module.app-registration-github.application_id
+}
+output "display_name" {
+  value = module.app-registration-github.display_name
+}
+output "object_id" {
+  value = module.app-registration-github.object_id
+}
