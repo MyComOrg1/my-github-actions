@@ -70,17 +70,17 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-    - name: Terraform apply
-    #   if: github.ref == 'refs/heads/master' //todo: apply only for master branch
-      id: tfapply
-      run: |
-        terraform apply "out.tfplan"
-      env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
-        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        TF_LOG: DEBUG
+    # - name: Terraform apply
+    # #   if: github.ref == 'refs/heads/master' //todo: apply only for master branch
+    #   id: tfapply
+    #   run: |
+    #     terraform apply "out.tfplan"
+    #   env:
+    #     ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+    #     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
+    #     ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+    #     ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    #     TF_LOG: DEBUG
 
     - name: Logout from Azure
       if: ${{ always() }}
