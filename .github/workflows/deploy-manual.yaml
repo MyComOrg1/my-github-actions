@@ -1,7 +1,7 @@
 name: 'PAE Toolchain Infra Workflow manual'
 
 on:
-  workflow_call: # this is the only one needed to enabled 'callable'
+  workflow_dispatch: # this is the only one needed to enabled 'callable'
 
 permissions:
   id-token: write
