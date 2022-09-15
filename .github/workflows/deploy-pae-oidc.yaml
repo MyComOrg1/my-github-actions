@@ -1,6 +1,7 @@
-name: 'PAE Toolchain Infra Workflow'
+name: 'PAE'
  
 on:
+  workflow_dispatch: # this is the only one needed to enabled 'callable'
   push:
     branches:
     - 'pae/*'       
